@@ -22,7 +22,7 @@ public class BotInit {
 	}
 	
 	public static void startBot() throws LoginException {
-		jda = JDABuilder.createDefault("NzcwMzA3MTUwMzExNDU2Nzcw.X5bqcA.ngiqr3FitYn2c7Du33ea2HKyTvU").build();
+		jda = JDABuilder.createDefault("TOKEN").build();
 		jda.getPresence().setStatus(OnlineStatus.ONLINE);
 		jda.getPresence().setActivity(Activity.listening(prefix + "info"));
 	}
