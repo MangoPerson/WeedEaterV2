@@ -26,8 +26,6 @@ public class BotInit {
 			cfg = new ConfigFile("config.txt");
 			prefix = cfg.valueOf("prefix");
 			token = cfg.valueOf("token");
-			System.out.println(token);
-			System.out.println("NzcwMzA3MTUwMzExNDU2Nzcw.X5bqcA.lf1W1PkhoNeF1FSgS2mHxw_4N3Y");
 			startBot();
 		} catch (LoginException | IOException e) {
 			e.printStackTrace();
