@@ -7,5 +7,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/Thomas/Desktop/Java Libraries/Dependencies/JDA-4.3.0_277-withDependencies.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Thomas/Desktop/Java Libraries/Dependencies/reflections-0.10.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

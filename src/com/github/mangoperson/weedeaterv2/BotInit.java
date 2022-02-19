@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.security.auth.login.LoginException;
 
+import com.github.mangoperson.weedeaterv2.util.CommandListener;
 import com.github.mangoperson.weedeaterv2.util.ConfigFile;
 
 import net.dv8tion.jda.api.JDA;
@@ -36,5 +37,7 @@ public class BotInit {
 		jda = JDABuilder.createDefault(token).build();
 		jda.getPresence().setStatus(OnlineStatus.ONLINE);
 		jda.getPresence().setActivity(Activity.listening(prefix + "info"));
+		
+		jda.addEventListener(new CommandListener());
 	}
 }
