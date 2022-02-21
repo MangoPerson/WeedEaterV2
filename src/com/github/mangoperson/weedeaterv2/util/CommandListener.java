@@ -1,23 +1,21 @@
 package com.github.mangoperson.weedeaterv2.util;
 
-import java.lang.reflect.InvocationTargetException;
+import java.io.IOException;
 import java.util.Set;
 
-import org.reflections.Reflections;
-
 import com.github.mangoperson.weedeaterv2.BotInit;
+import com.google.common.reflect.ClassPath;
+import com.google.common.reflect.ClassPath.ClassInfo;
 
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class CommandListener extends ListenerAdapter {
 	
-	Reflections reflections = new Reflections();
-	
-	Set<Class<? extends Command>> commandList;
-	
-	public CommandListener() {
-		commandList = reflections.getSubTypesOf(Command.class);
+	Set<ClassInfo> commandList;
+		
+	public CommandListener() throws IOException {
+		commandList = ClassPath.from(this.getClass().getClassLoader()).getTopLevelClasses("com.github.mangoperson.weedeaterv2.commands");
 	}
 	
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
@@ -25,14 +23,14 @@ public class CommandListener extends ListenerAdapter {
 		
 		System.out.println(args);
 		
-		for(Class<? extends Command> commandClass : commandList) {
+		for(ClassInfo commandClass : commandList) {
 			try {
-				Command command = (Command) commandClass.getConstructors()[0].newInstance((Object[])null);
+				Command command = (Command) commandClass.getClass().getConstructors()[0].newInstance((Object[])null);
 				
 				if(args[0] == BotInit.prefix + command.command) {
 					command.run(event);
 				}
-			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | SecurityException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
