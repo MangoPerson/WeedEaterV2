@@ -9,9 +9,15 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 
 public abstract class Command {
 		
+	public String description;
+	
 	protected GuildMessageReceivedEvent event;
 	
 	protected String[] args;
+	
+	public Command(String description) {
+		this.description = description;
+	}
 	
 	public void run(GuildMessageReceivedEvent event) {
 		this.event = event;

@@ -13,7 +13,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 public class CommandListener extends ListenerAdapter {
 	
-	Set<ClassInfo> commandList;
+	public static Set<ClassInfo> commandList;
 		
 	public CommandListener() throws IOException {
 		commandList = ClassPath.from(this.getClass().getClassLoader()).getTopLevelClasses("com.github.mangoperson.weedeaterv2.commands");
@@ -22,11 +22,11 @@ public class CommandListener extends ListenerAdapter {
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		String[] args = event.getMessage().getContentRaw().split("\\s+");
 		
-		for(ClassInfo commandClass : commandList) {
+		for(ClassInfo cmdClass : commandList) {
 			
-			if ((BotInit.prefix + commandClass.getSimpleName().toLowerCase()).equalsIgnoreCase(args[0])) {
+			if ((BotInit.prefix + cmdClass.getSimpleName().toLowerCase()).equalsIgnoreCase(args[0])) {
 				try {
-					((Command) commandClass.load().getConstructors()[0].newInstance()).run(event);
+					((Command) cmdClass.load().getConstructors()[0].newInstance()).run(event);
 				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException| InvocationTargetException | SecurityException e) {
 					e.printStackTrace();
 				}
