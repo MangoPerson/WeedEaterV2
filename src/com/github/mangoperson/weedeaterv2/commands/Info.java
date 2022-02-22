@@ -12,6 +12,5 @@ public class Info extends Command {
 		EmbedBuilder embed = new EmbedBuilder();
 
 		event.getChannel().sendMessage(embed.build()).queue();
-	}
-	
+	}	
 }
