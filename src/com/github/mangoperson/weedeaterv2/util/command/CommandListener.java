@@ -1,6 +1,7 @@
-package com.github.mangoperson.weedeaterv2.util;
+package com.github.mangoperson.weedeaterv2.util.command;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
 import com.github.mangoperson.weedeaterv2.BotInit;
@@ -21,17 +22,14 @@ public class CommandListener extends ListenerAdapter {
 	public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
 		String[] args = event.getMessage().getContentRaw().split("\\s+");
 		
-		System.out.println(args);
-		
 		for(ClassInfo commandClass : commandList) {
-			try {
-				Command command = (Command) commandClass.getClass().getConstructors()[0].newInstance((Object[])null);
-				
-				if(args[0] == BotInit.prefix + command.command) {
-					command.run(event);
+			
+			if ((BotInit.prefix + commandClass.getSimpleName().toLowerCase()).equalsIgnoreCase(args[0])) {
+				try {
+					((Command) commandClass.load().getConstructors()[0].newInstance()).run(event);
+				} catch (InstantiationException | IllegalAccessException | IllegalArgumentException| InvocationTargetException | SecurityException e) {
+					e.printStackTrace();
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
 		}
 	}

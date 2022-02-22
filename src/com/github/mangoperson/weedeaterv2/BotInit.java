@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import javax.security.auth.login.LoginException;
 
-import com.github.mangoperson.weedeaterv2.util.CommandListener;
 import com.github.mangoperson.weedeaterv2.util.ConfigFile;
+import com.github.mangoperson.weedeaterv2.util.command.CommandListener;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;

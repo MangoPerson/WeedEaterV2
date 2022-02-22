@@ -1,12 +1,17 @@
 package com.github.mangoperson.weedeaterv2.commands;
 
-import com.github.mangoperson.weedeaterv2.util.Command;
+import com.github.mangoperson.weedeaterv2.util.command.Cmd;
+import com.github.mangoperson.weedeaterv2.util.command.Command;
+
+import net.dv8tion.jda.api.EmbedBuilder;
 
 public class Info extends Command {
-
-	@Override
+	
+	@Cmd("info")
 	public void runCommand() {
-		event.getChannel().sendMessage("Hello").queue();
+		EmbedBuilder embed = new EmbedBuilder();
+
+		event.getChannel().sendMessage(embed.build()).queue();
 	}
 	
 }
