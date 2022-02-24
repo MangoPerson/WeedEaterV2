@@ -24,7 +24,10 @@ public class Info extends Command {
 		
 		for (ClassInfo cmdClass : CommandListener.commandList) {
 			try {
-				embed.addField(BotInit.prefix + cmdClass.getSimpleName().toLowerCase(), ((Command)cmdClass.load().getConstructors()[0].newInstance()).description, false);
+				embed.addField(
+						BotInit.prefix + cmdClass.getSimpleName().toLowerCase(),
+						((Command)cmdClass.load().getConstructors()[0].newInstance()).description,
+						false);
 			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException| InvocationTargetException | SecurityException e) {
 				e.printStackTrace();
 			}
